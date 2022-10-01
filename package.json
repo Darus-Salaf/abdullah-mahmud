@@ -4,12 +4,18 @@
   "license": "MIT",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
+"homepage": "https://anabuk.com",
+  "commands": {
     "dev": "next dev -p 4000",
     "resp": " next dev -H 192.168.13.222",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.10",
