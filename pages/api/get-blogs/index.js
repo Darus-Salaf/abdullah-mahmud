@@ -3,8 +3,8 @@ import connectDb from 'configs/db'
 
 const handler = async (req, res) => {
   try {
-    const blogs = await blog.find()
-    res.status(200).json({ blogs })
+    const response = await blog.find()
+    res.status(200).json({ response })
   } catch (error) {
     res.status(404).json({ error, message: error.message })
   }
