@@ -1,15 +1,23 @@
-import { Navbar, Text, Avatar, Dropdown } from '@nextui-org/react'
+import { Navbar, Text, Avatar, Dropdown, Switch } from '@nextui-org/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useTheme as useNextTheme } from 'next-themes'
+import { useTheme } from '@nextui-org/react'
+import { VscColorMode } from 'react-icons/vsc'
 import { AiFillSetting } from 'react-icons/ai'
+import { BsFillMoonStarsFill, BsSunFill } from 'react-icons/bs'
+import { useAppContext } from 'utils/context'
 
 export default function Nav() {
   const { pathname } = useRouter()
+  const { setTheme } = useNextTheme()
+  const { isDark, type } = useTheme()
   const collapseItems = [
     { name: 'Blogs', link: '/blog' },
-    { name: 'Books', link: '/books' },
+    { name: 'Books', link: '/blog/create' },
     { name: 'Lectures', link: '/lectures' }
   ]
+  const [size, setSize] = useAppContext()
 
   return (
     <>
@@ -43,7 +51,7 @@ export default function Nav() {
         >
           {collapseItems.map(item => (
             <Link key={item.link} href={item.link}>
-              <Navbar.Link isActive={pathname === item.link}>
+              <Navbar.Link isActive={pathname.includes(item.link)}>
                 {item.name}
               </Navbar.Link>
             </Link>
@@ -57,7 +65,7 @@ export default function Nav() {
             }
           }}
         >
-          <Dropdown placement='bottom-right'>
+          <Dropdown isBordered placement='bottom-right'>
             <Navbar.Item>
               <Dropdown.Trigger>
                 <Avatar
@@ -65,20 +73,68 @@ export default function Nav() {
                   as='button'
                   color='secondary'
                   size='md'
-                  icon={<AiFillSetting className='h-8 w-8 text-white' />}
+                  icon={<AiFillSetting className='h-8 w-8 text-[#fff]' />}
                 />
               </Dropdown.Trigger>
             </Navbar.Item>
             <Dropdown.Menu aria-label='User menu actions' color='secondary'>
-              <Dropdown.Item key='profile' css={{ height: '$18' }}>
-                <Link href='/blog'>
-                  <a>Blogs</a>
-                </Link>
+              <Dropdown.Item
+                icon={<VscColorMode className='w-8 h-8 text-primary' />}
+                command={
+                  <Switch
+                    size='lg'
+                    color='secondary'
+                    bordered
+                    shadow
+                    iconOn={<BsFillMoonStarsFill />}
+                    iconOff={
+                      <span className=' bg-yellow-400 rounded-full p-1'>
+                        <BsSunFill />
+                      </span>
+                    }
+                    checked={isDark}
+                    onChange={e =>
+                      setTheme(e.target.checked ? 'dark' : 'light')
+                    }
+                  />
+                }
+                description={`Current is ${type}`}
+                key='color'
+                css={{
+                  height: '$18'
+                }}
+              >
+                Theme
               </Dropdown.Item>
-              <Dropdown.Item key='profile2' css={{ height: '$18' }}>
-                <Link href='/blog'>
-                  <a>Books</a>
-                </Link>
+              <Dropdown.Item
+                icon={<VscColorMode className='w-8 h-8 text-primary' />}
+                description={
+                  <div className='flex items-center justify-between'>
+                    <button
+                      onClick={() => setSize(prev => prev + 2)}
+                      className='text-lg bg-primary text-white rounded-full px-2 mx-1'
+                    >
+                      +
+                    </button>
+                    <span className='text-primary font-bold text-lg px-2'>
+                      {size / 10}
+                    </span>
+                    <button
+                      onClick={() => {
+                        if (size > 10) {
+                          setSize(prev => prev - 2)
+                        }
+                      }}
+                      className='text-lg bg-primary text-white rounded-full px-[10px] mx-1'
+                    >
+                      -
+                    </button>
+                  </div>
+                }
+                key='fontsize'
+                css={{ height: '$18' }}
+              >
+                Font Size
               </Dropdown.Item>
               <Dropdown.Item key='profile3' css={{ height: '$18' }}>
                 <Link href='/blog'>
@@ -93,7 +149,7 @@ export default function Nav() {
             <Navbar.CollapseItem
               key={item.link}
               activeColor='secondary'
-              isActive={pathname === item.link}
+              isActive={pathname.includes(item.link)}
             >
               <Link href={item.link}>
                 <a className=' min-w-full'>{item.name}</a>

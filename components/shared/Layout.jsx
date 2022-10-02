@@ -8,7 +8,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Siedebar />
-      <div className='ml-0 md:ml-40'>
+      <div className='ml-0 md:ml-52'>
         <header>
           <Navbar />
         </header>

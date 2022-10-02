@@ -2,6 +2,7 @@ import { NextUIProvider } from '@nextui-org/react'
 import Layout from 'components/shared/Layout'
 import { darkTheme, lightTheme } from 'configs/theme'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
+import { AppWrapper } from 'utils/context'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
@@ -15,9 +16,11 @@ function MyApp({ Component, pageProps }) {
       }}
     >
       <NextUIProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <AppWrapper>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </AppWrapper>
       </NextUIProvider>
     </NextThemesProvider>
   )

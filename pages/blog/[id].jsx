@@ -1,14 +1,30 @@
 import { API } from 'configs/config'
+import Image from 'next/image'
+import { useAppContext } from 'utils/context'
 
 export default function detailsBlog({ blog: { response: blog } }) {
+  const [size, setSize] = useAppContext()
   return (
-    <div className='my-5 max-w-lg mx-auto'>
-      <h1 className='text-3xl'>Detail Blogs</h1>
+    <div className='my-10 max-w-2xl px-5 mx-auto'>
       <div className='my-4'>
-        <div className='text-center'>
-          <h1 className='text-2xl'>{blog.title}</h1>
-          <p className='text-xl'>{blog.body}</p>
+        <div className='w-full rounded-t-2xl overflow-hidden'>
+          <Image
+            src={blog.image}
+            width='100%'
+            height='100%'
+            layout='responsive'
+            alt={blog.title}
+          />
         </div>
+        <h1
+          style={{ fontSize: `${size / 10}rem` }}
+          className='text-primary bg-lite border-l-4 border-primary pl-3 py-3 font-bold rounded-b-md'
+        >
+          {blog.title}
+        </h1>
+        <p style={{ fontSize: `${size / 10}rem` }} className='text-start mt-4'>
+          {blog.body}
+        </p>
       </div>
     </div>
   )
