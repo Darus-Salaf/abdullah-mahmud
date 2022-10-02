@@ -7,11 +7,13 @@ export default function Layout({ children }) {
 
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
       <Siedebar />
-      <div className='ml-0 sm:ml-32'>{children}</div>
+      <div className='ml-0 md:ml-40'>
+        <header>
+          <Navbar />
+        </header>
+        {children}
+      </div>
       <footer className='text-center py-2 bg-green-500'>this is footer</footer>
     </>
   )

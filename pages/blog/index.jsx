@@ -18,13 +18,12 @@ export default function blog({ blogs }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const response = await fetch(`${API}/get-blogs`)
   const data = await response.json()
   return {
     props: {
       blogs: data
-    },
-    revalidate: 3
+    }
   }
 }

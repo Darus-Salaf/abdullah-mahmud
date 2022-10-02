@@ -14,20 +14,19 @@ export default function detailsBlog({ blog: { response: blog } }) {
   )
 }
 
-export async function getStaticPaths() {
-  const response = await fetch(`${API}/get-blogs`)
-  const data = await response.json()
-  const paths = data.response.map(item => ({ params: { id: `${item._id}` } }))
-  return { paths, fallback: 'blocking' }
-}
-export async function getStaticProps(context) {
+// export async function getStaticPaths() {
+//   const response = await fetch(`${API}/get-blogs`)
+//   const data = await response.json()
+//   const paths = data.response.map(item => ({ params: { id: `${item._id}` } }))
+//   return { paths, fallback: 'blocking' }
+// }
+export async function getServerSideProps(context) {
   const { params } = context
   const response = await fetch(`${API}/get-blogs/${params.id}`)
   const data = await response.json()
   return {
     props: {
       blog: data
-    },
-    revalidate: 3
+    }
   }
 }

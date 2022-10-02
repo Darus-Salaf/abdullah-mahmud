@@ -1,58 +1,57 @@
 import { Navbar, Text, Avatar, Dropdown } from '@nextui-org/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { AiFillSetting } from 'react-icons/ai'
 
 export default function Nav() {
+  const { pathname } = useRouter()
   const collapseItems = [
-    'Profile',
-    'Dashboard',
-    'Activity',
-    'Analytics',
-    'System',
-    'Deployments',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out'
+    { name: 'Blogs', link: '/blog' },
+    { name: 'Books', link: '/books' },
+    { name: 'Lectures', link: '/lectures' }
   ]
 
   return (
     <>
       <Navbar shouldHideOnScroll isCompact variant='floating'>
-        <Navbar.Toggle showIn='xs' />
-        <Navbar.Brand
-          css={{
-            '@xs': {
-              w: '12%'
-            }
-          }}
-        >
-          <AcmeLogo />
-          <Text b color='inherit'>
-            ABDULLAH MAHMUD
-          </Text>
+        <Navbar.Toggle showIn='sm' />
+        <Navbar.Brand>
+          <Link href='/'>
+            <a className='flex items-center'>
+              <Avatar
+                bordered
+                zoomed
+                src='/images/logo.jpg'
+                css={{ d: 'flex', '@sm': { d: 'none' } }}
+                color='secondary'
+              />
+              <Text
+                b
+                css={{ ml: 5, fontSize: '0.8rem', '@xs': { fontSize: '1rem' } }}
+                color='secondary'
+              >
+                ABDULLAH MAHMUD
+              </Text>
+            </a>
+          </Link>
         </Navbar.Brand>
         <Navbar.Content
           enableCursorHighlight
           activeColor='secondary'
-          hideIn='xs'
-          variant='highlight-rounded'
+          hideIn='sm'
+          variant='highlight'
         >
-          <Link href='/'>
-            <Navbar.Link>Home</Navbar.Link>
-          </Link>
-          <Link href='/blog'>
-            <Navbar.Link>Blog</Navbar.Link>
-          </Link>
-          <Link href='/blog'>
-            <Navbar.Link>Pricing</Navbar.Link>
-          </Link>
-          <Link href='/blog'>
-            <Navbar.Link>Company</Navbar.Link>
-          </Link>
+          {collapseItems.map(item => (
+            <Link key={item.link} href={item.link}>
+              <Navbar.Link isActive={pathname === item.link}>
+                {item.name}
+              </Navbar.Link>
+            </Link>
+          ))}
         </Navbar.Content>
         <Navbar.Content
           css={{
-            '@xs': {
+            '@sm': {
               w: '12%',
               jc: 'flex-end'
             }
@@ -66,37 +65,25 @@ export default function Nav() {
                   as='button'
                   color='secondary'
                   size='md'
-                  src='https://i.pravatar.cc/150?u=a042581f4e29026704d'
+                  icon={<AiFillSetting className='h-8 w-8 text-white' />}
                 />
               </Dropdown.Trigger>
             </Navbar.Item>
-            <Dropdown.Menu
-              aria-label='User menu actions'
-              color='secondary'
-              onAction={actionKey => console.log({ actionKey })}
-            >
+            <Dropdown.Menu aria-label='User menu actions' color='secondary'>
               <Dropdown.Item key='profile' css={{ height: '$18' }}>
-                <Text b color='inherit' css={{ d: 'flex' }}>
-                  Signed in as
-                </Text>
-                <Text b color='inherit' css={{ d: 'flex' }}>
-                  zoey@example.com
-                </Text>
+                <Link href='/blog'>
+                  <a>Blogs</a>
+                </Link>
               </Dropdown.Item>
-              <Dropdown.Item key='settings' withDivider>
-                My Settings
+              <Dropdown.Item key='profile2' css={{ height: '$18' }}>
+                <Link href='/blog'>
+                  <a>Books</a>
+                </Link>
               </Dropdown.Item>
-              <Dropdown.Item key='team_settings'>Team Settings</Dropdown.Item>
-              <Dropdown.Item key='analytics' withDivider>
-                Analytics
-              </Dropdown.Item>
-              <Dropdown.Item key='system'>System</Dropdown.Item>
-              <Dropdown.Item key='configurations'>Configurations</Dropdown.Item>
-              <Dropdown.Item key='help_and_feedback' withDivider>
-                Help & Feedback
-              </Dropdown.Item>
-              <Dropdown.Item key='logout' withDivider color='error'>
-                Log Out
+              <Dropdown.Item key='profile3' css={{ height: '$18' }}>
+                <Link href='/blog'>
+                  <a>Lectures</a>
+                </Link>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -104,21 +91,12 @@ export default function Nav() {
         <Navbar.Collapse>
           {collapseItems.map((item, index) => (
             <Navbar.CollapseItem
-              key={item}
+              key={item.link}
               activeColor='secondary'
-              css={{
-                color: index === collapseItems.length - 1 ? '$error' : ''
-              }}
-              isActive={index === 2}
+              isActive={pathname === item.link}
             >
-              <Link
-                // color='inherit'
-                // css={{
-                //   minWidth: '100%'
-                // }}
-                href='#'
-              >
-                {item}
+              <Link href={item.link}>
+                <a className=' min-w-full'>{item.name}</a>
               </Link>
             </Navbar.CollapseItem>
           ))}
@@ -127,8 +105,6 @@ export default function Nav() {
     </>
   )
 }
-
-import { Spacer } from '@nextui-org/react'
 
 export const AcmeLogo = () => (
   <svg

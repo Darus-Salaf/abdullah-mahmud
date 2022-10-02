@@ -4,7 +4,7 @@ export default function Siedebar() {
   const { isDark, theme } = useTheme()
   return (
     <div
-      className='pt-20 hidden sm:block fixed h-full left-0 top-0 w-32 text-white'
+      className='pt-20 hidden md:block fixed h-full left-0 top-0 w-40 text-white'
       style={{
         backgroundColor: isDark
           ? theme.colors.secondary.value
