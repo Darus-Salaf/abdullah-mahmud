@@ -22,7 +22,10 @@ export default function DetailsBlog({ blog: { response: blog } }) {
         >
           {blog.title}
         </h1>
-        <p style={{ fontSize: `${size / 10}rem` }} className='text-start mt-4'>
+        <p
+          style={{ fontSize: `${size / 10}rem` }}
+          className='text-start mt-4 prewrap'
+        >
           {blog.body}
         </p>
       </div>

@@ -14,7 +14,7 @@ export default function Nav() {
   const { isDark, type } = useTheme()
   const collapseItems = [
     { name: 'Blogs', link: '/blog' },
-    { name: 'Books', link: '/blog/create' },
+    { name: 'Books', link: '/blog/Create' },
     { name: 'Lectures', link: '/lectures' }
   ]
   const [size, setSize] = useAppContext()

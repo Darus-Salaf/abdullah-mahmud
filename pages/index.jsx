@@ -17,7 +17,7 @@ export default function Home() {
       </Head>
 
       <main className=' max-w-3xl mx-auto px-5'>
-        <div className='text-center mt-12'>
+        <div className='text-center mt-12 mb-10'>
           <div className='flex justify-center'>
             <div className=' border-8 w-[200px] overflow-hidden h-[200px] border-[#efefef] rounded-full'>
               <Image
