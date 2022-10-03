@@ -2,7 +2,7 @@ import { API } from 'configs/config'
 import Image from 'next/image'
 import { useAppContext } from 'utils/context'
 
-export default function detailsBlog({ blog: { response: blog } }) {
+export default function DetailsBlog({ blog: { response: blog } }) {
   const [size, setSize] = useAppContext()
   return (
     <div className='my-10 max-w-2xl px-5 mx-auto'>

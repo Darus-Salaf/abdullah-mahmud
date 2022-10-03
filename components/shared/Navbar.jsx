@@ -20,8 +20,13 @@ export default function Nav() {
   const [size, setSize] = useAppContext()
 
   return (
-    <>
-      <Navbar shouldHideOnScroll isCompact variant='floating'>
+    <div className=' max-w-5xl mx-auto'>
+      <Navbar
+        shouldHideOnScroll
+        isBordered={isDark}
+        isCompact
+        variant='floating'
+      >
         <Navbar.Toggle showIn='sm' />
         <Navbar.Brand>
           <Link href='/'>
@@ -88,7 +93,7 @@ export default function Nav() {
                     shadow
                     iconOn={<BsFillMoonStarsFill />}
                     iconOff={
-                      <span className=' bg-yellow-400 rounded-full p-1'>
+                      <span className=' bg-[yellow] rounded-full p-1'>
                         <BsSunFill />
                       </span>
                     }
@@ -158,7 +163,7 @@ export default function Nav() {
           ))}
         </Navbar.Collapse>
       </Navbar>
-    </>
+    </div>
   )
 }
 

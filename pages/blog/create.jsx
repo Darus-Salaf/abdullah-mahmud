@@ -3,7 +3,7 @@ import axios from 'axios'
 import { API } from 'configs/config'
 import { useState } from 'react'
 
-export default function create() {
+export default function Create() {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState({
     title: '',

@@ -6,7 +6,9 @@ export default function Siedebar() {
   const { isDark, theme } = useTheme()
   return (
     <div
-      className='pt-16 text-center hidden md:block overflow-hidden fixed h-full left-0 top-0 w-52 text-white'
+      className={`pt-16 border-r-4 ${
+        isDark ? 'border-primary ' : 'border-black '
+      } text-center hidden md:block overflow-hidden fixed h-full left-0 top-0 w-52 text-white`}
       style={{
         backgroundColor: isDark
           ? theme.colors.black.value
@@ -14,7 +16,11 @@ export default function Siedebar() {
       }}
     >
       <div className='px-5'>
-        <div className='border-[#6321a6] rounded-full border-8 '>
+        <div
+          className={`border-[#6321a6] rounded-full shadow-2xl ${
+            isDark ? 'shadow-[#eadcf86e]' : 'shadow-[#0000007c]'
+          }  border-8`}
+        >
           <div className='rounded-full overflow-hidden border-4 border-[white]'>
             <Link href='/' passHref>
               <Image
